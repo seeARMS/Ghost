@@ -56,10 +56,44 @@ createOwner = function createOwner(logger) {
         if (ownerRole) {
             user.roles = [ownerRole.id];
 
-            logger.info('Creating owner');
-            return models.User.add(user, fixtureUtils.modelOptions);
+            logger.info('Creating tenant');
+            var tenant = models.Tenant.add(null, fixtureUtils.modelOptions).then(function(tenant) {
+              logger.info('Tenant id ' + tenant.id);
+
+              user.tenant = tenant;
+
+              logger.info('Creating owner');
+              return models.User.add(user, fixtureUtils.modelOptions);
+
+            });
+
+
         }
     });
+};
+
+/**
+ * ### Create Tenant
+ * Creates the tenant fixture and associates it to the owner.
+ *
+ * @param {{info: logger.info, warn: logger.warn}} logger
+ * @returns {Promise<*>}
+ */
+createTenant = function createOwner(logger) {
+    var user = {
+        name:             'Ghost Owner',
+        email:            'ghost@ghost.org',
+        status:           'inactive',
+        password:         coreUtils.uid(50)
+    };
+
+    models.User.findOne({role: 'Owner'}).then(function (user) {
+      logger.info('Creating tenant');
+
+      user.tenant = models.Tenant.add(null, user);
+      return models.User.edit(user, fixtureUtils.modelOptions);
+    });
+
 };
 
 /**

@@ -4,6 +4,6 @@
 [submodule "core/Ghost-Admin"]
 	path = core/Ghost-Admin
 	url = git@github.com:seeARMS/Ghost-Admin.git
-[submodule "core/client"]
-	path = core/client
+[submodule "client"]
+	path = core/Ghost-Admin
 	url = git@github.com:seeARMS/Ghost-Admin.git

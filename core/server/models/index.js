@@ -27,7 +27,8 @@ models = [
     'settings',
     'subscriber',
     'tag',
-    'user'
+    'user',
+    'tenant'
 ];
 
 function init() {

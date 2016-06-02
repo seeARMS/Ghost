@@ -158,6 +158,10 @@ User = ghostBookshelf.Model.extend({
         return this.belongsToMany('Role');
     },
 
+    tenant: function tenants() {
+        return this.belongsTo('Tenant');
+    },
+
     permissions: function permissions() {
         return this.belongsToMany('Permission');
     },

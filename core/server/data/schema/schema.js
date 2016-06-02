@@ -60,6 +60,19 @@ module.exports = {
         updated_at: {type: 'dateTime',  nullable: true},
         updated_by: {type: 'integer',  nullable: true}
     },
+    tenants: {
+        id: {type: 'increments', nullable: false, primary: true},
+        created_at: {type: 'dateTime',  nullable: false},
+        created_by: {type: 'integer',  nullable: false},
+        updated_at: {type: 'dateTime',  nullable: true},
+        updated_by: {type: 'integer',  nullable: true}
+    },
+    tenants_users: {
+        id: {type: 'increments', nullable: false, primary: true},
+        tenant_id: {type: 'integer', nullable: false},
+        user_id: {type: 'integer', nullable: false}
+    },
+
     roles_users: {
         id: {type: 'increments', nullable: false, primary: true},
         role_id: {type: 'integer', nullable: false},
