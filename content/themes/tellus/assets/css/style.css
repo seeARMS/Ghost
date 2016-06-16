@@ -1,0 +1,1406 @@
+   /* ==========================================================================
+   								Table of Contents
+   ========================================================================== */
+
+/*
+
+    0.  Normalize
+    1.  General
+    2.  Utilities
+    3.  Header
+    4.  Search
+    5.  Foreach-Articles
+    6.  Pagination
+    7.  Footer
+    8.  Post
+    9.  Author/Tag Page
+   10.  Media Queries (Tablet)
+   11.  Media Queries (Phone)
+
+ */
+
+/* ==========================================================================
+   0. Normalize.css v2.1.3 | MIT License | git.io/normalize | (minified)
+   ========================================================================== */
+
+article, aside, details,
+figcaption, figure,
+footer, header, hgroup,
+main, nav, section,
+summary { display: block; }
+audio, canvas, video { display: inline-block; }
+audio:not([controls]) { display: none; height: 0; }
+[hidden], template { display: none; }
+html {
+   font-family: sans-serif;
+   -ms-text-size-adjust: 100%;
+   -webkit-text-size-adjust: 100%;
+}
+body { margin: 0; }
+a { background: transparent; }
+a:focus { outline: thin dotted; }
+a:active, a:hover { outline: 0; }
+h1 { font-size: 2em; margin: 0.67em 0; }
+abbr[title] { border-bottom: 1px dotted; }
+b, strong { font-weight: 700; }
+dfn { font-style: italic; }
+hr {
+   -moz-box-sizing: content-box;
+   box-sizing: content-box;
+   height: 0;
+}
+mark { color: #5e5e5e; }
+code, kbd, pre,
+samp { font-family: monospace, serif; font-size: 1em; }
+pre { white-space: pre-wrap; }
+q { quotes: "\201C" "\201D" "\2018" "\2019"; }
+small { font-size: 80%; }
+sub, sup {
+   font-size: 75%;
+   line-height: 0;
+   position: relative;
+   vertical-align: baseline;
+}
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+img { border: 0; }
+svg:not(:root) { overflow: hidden; }
+figure { margin: 0; }
+fieldset {
+   border: 1px solid #c0c0c0;
+   margin: 0 2px;
+   padding: 0.35em 0.625em 0.75em;
+}
+legend { border: 0; padding: 0; }
+button, input, select,
+textarea { font-family: inherit; font-size: 100%; margin: 0; }
+button, input { line-height: normal; }
+button, select { text-transform: none; }
+button, html input[type="button"],
+input[type="reset"], input[type="submit"] {
+   -webkit-appearance: button;
+   cursor: pointer;
+}
+button[disabled], html input[disabled] { cursor: default; }
+input[type="checkbox"],
+input[type="radio"] { box-sizing: border-box; padding: 0; }
+input[type="search"] {
+   -webkit-appearance: textfield;
+   -moz-box-sizing: content-box;
+   -webkit-box-sizing: content-box;
+   box-sizing: content-box;
+}
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; }
+button::-moz-focus-inner,
+input::-moz-focus-inner { border: 0; padding: 0; }
+textarea { overflow: auto; vertical-align: top; }
+table { border-collapse: collapse; border-spacing: 0; }
+ 
+
+ /* ==========================================================================
+   					1.  General - Setting up some base styles
+   ========================================================================== */
+
+html {
+	height: 100%;
+    max-height: 100%;
+    font-size: 62.5%;
+    margin: 0;
+	}
+
+body {
+	height: 100%;
+    max-height: 100%;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 2rem;
+    line-height: 1.6em;
+    color: #5e5e5e;
+	background: #fff;
+    margin: 0 auto;
+    -moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	}
+
+.wrapper_tellus {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.main-wrapper_tellus {
+    min-height: 100%;
+    margin-bottom: -60px;
+}
+
+.main-wrapper_tellus:after {
+    content: "";
+    display: block;
+    height: 60px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 700;
+	text-rendering: optimizelegibility;
+	line-height: 1;
+    margin: 1.6rem 0 1rem;
+    color: #444;
+	}	
+	
+::-moz-selection {
+    color: #fff;
+    background: #ffb347;
+    text-shadow: none;
+	}
+
+::selection {
+    color: #fff;
+    background: #ffb347;
+    text-shadow: none;
+	}
+
+h1 { font-size: 4.8rem; }
+
+h2 { font-size: 3.8rem; }
+
+h3 { font-size: 3.2rem; }
+
+h4 { font-size: 2.8rem; }
+
+h5 { font-size: 2.2rem; }
+
+h6 { font-size: 1.8rem; }
+
+a {
+    color: #63ac3e;
+    transition: all ease 0.3s;
+    text-decoration: none;
+	}
+	
+a:visited { outline: none; }
+
+.post-content_tellus a:hover { text-decoration: underline; }	
+		
+a:active { outline: none; }	
+	
+a:focus { outline: none; }
+
+h1 a, h2 a, h3 a,
+h4 a, h5 a, h6 a {
+    color: #63ac3e;
+	}
+
+p, ul, ol, dl {
+    margin: 0.5em 0 1.6em;
+	}
+
+ol ol, ul ul,
+ul ol, ol ul {
+    margin: 0.4em 0;
+	}
+
+dl dt {
+    float: left;
+    width: 180px;
+    overflow: hidden;
+    clear: left;
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: bold;
+    margin-bottom: 1em
+	}
+
+dl dd {
+    margin-left: 200px;
+    margin-bottom: 1em
+	}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #e5e5e5;
+    margin: 2rem 0;
+    padding: 0;
+	}
+
+img { border: 0; }	
+
+.post-content_tellus { line-height: 1.4; margin-bottom: 5rem !important; }
+
+.post-content_tellus input {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.4rem;
+    background: #fff;
+    border-radius: 2px;
+    border: 1px solid #ddd;
+    padding: 0.5rem 1rem;
+    transition: all ease 0.3s;
+    color: #bbb;
+    outline: none;
+}
+
+.post-content_tellus input:hover { border: 1px solid #ffb347; }
+
+.post-content_tellus input[type="text"]:focus,
+.post-content_tellus #inputArea textarea:focus { color: #000; border: 1px solid #ffb347; } 
+
+
+.post-content_tellus img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+	margin: 0 auto;
+    padding: 0.6em 0;
+	} 
+	
+blockquote {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 1.6em 0 1.6em 0;
+    padding: 0 0 0 1.6em;
+    border-left: 4px solid #ffb347;
+	}
+
+blockquote p {
+    margin: 0.8em 0;
+    font-style: italic;
+	}
+
+blockquote small {
+    display: inline-block;
+    margin: 0.8em 0 0.8em 1.5em;
+    font-size:0.9em;
+	}
+
+blockquote small:before { content: '\2014 \00A0'; }
+
+blockquote cite { font-weight:bold; }
+
+blockquote cite a { font-weight: normal; }
+
+mark { background: #ffb347; }
+
+code, tt {
+    padding: 1px 3px;
+    font-family: Inconsolata, monospace, sans-serif;
+    font-size: 0.9em;
+    white-space: pre-wrap;
+    background: #fff;
+    border-radius: 2px;
+    border: 1px solid #ddd;
+	}
+
+pre {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 1.6em 0;
+    width: 100%;
+    padding: 20px;
+    font-family: Inconsolata, monospace, sans-serif;
+    font-size: 0.9em;
+    white-space: pre;
+    overflow: auto;
+    background: #fff;
+    border-radius: 2px;
+    border: 1px solid #ddd;
+	}
+
+pre code, tt {
+    font-size: inherit;
+    white-space: -moz-pre-wrap;
+    white-space: pre-wrap;
+    background: transparent;
+    border: none;
+    padding: 0;
+	}
+
+kbd {
+    display: inline-block;
+    margin-bottom: 0.4em;
+    padding: 1px 8px;
+    border: #ccc 1px solid;
+    color: #666;
+    text-shadow: #fff 0 1px 0;
+    font-size: 0.9em;
+    font-weight: bold;
+    background: #f4f4f4;
+    border-radius: 4px;
+    box-shadow: 
+        0 1px 0 rgba(0, 0, 0, 0.2), 
+        0 1px 0 0 #fff inset;
+	}
+
+table {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 1.6em 0;
+    width:100%;
+    max-width: 100%;
+    background-color: transparent;
+	}
+
+table th,
+table td {
+    padding: 8px;
+    line-height: 20px;
+    text-align: left;
+    vertical-align: top;
+    border-top: 1px solid #efefef;
+	}
+
+table th { color: #000; }
+
+table caption + thead tr:first-child th,
+table caption + thead tr:first-child td,
+table colgroup + thead tr:first-child th,
+table colgroup + thead tr:first-child td,
+table thead:first-child tr:first-child th,
+table thead:first-child tr:first-child td {
+    border-top: 0;
+	}
+
+table tbody + tbody { border-top: 2px solid #efefef; }
+
+table table table { background-color: #fff; }
+
+table tbody > tr:nth-child(odd) > td,
+table tbody > tr:nth-child(odd) > th {
+    background-color: #f6f6f6;
+	}
+
+table.plain tbody > tr:nth-child(odd) > td,
+table.plain tbody > tr:nth-child(odd) > th {
+   background: transparent;
+	}
+
+iframe, .fluid-width-video-wrapper {
+    display: block;
+    margin: 1.6em 0;
+	}
+
+/* When a video is inside the fitvids wrapper, drop the
+margin on the iframe, cause it breaks stuff. */
+.fluid-width-video-wrapper iframe {
+    margin: 0;
+	}
+
+ /* ==========================================================================
+   					            2. Utilities
+   ========================================================================== */
+
+.hidden_tellus {
+	text-indent: -99999px;
+    visibility: hidden;
+    display: none;
+	}
+
+.error_tellus {
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 20rem;
+    box-sizing: padding-box;
+    max-width: 700px;
+}
+
+.error_tellus h1 { 
+    margin-top: 0;
+    font-size: 4.4rem;
+    font-weight: 100;
+}
+
+.error_tellus p { 
+    font-size: 1.6rem;
+    color: #444;
+    max-width: 400px;
+    margin: 0 auto;
+    font-weight: 300;
+}
+
+ /* ==========================================================================
+   					            3. Header 
+   ========================================================================== */
+
+.main-header_tellus, 
+.post-header_tellus, 
+.header-img_tellus {
+    min-height: 450px;
+    width: 100%;
+}
+
+ .header-img_tellus {
+    display: table;
+    text-align: center;
+}
+
+ .vertical_tellus { 
+     display: table-cell;
+     vertical-align: middle;
+     }
+
+.inner_tellus {
+    margin: 3rem auto 0;
+    padding: 0 2rem;
+    max-width: 700px;
+    position: relative;
+    text-align: center;
+}
+
+.img-cover_tellus { 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+    min-height: 450px;
+    width: 100%;
+}
+
+.img-cover_tellus:before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: inherit;
+    height: inherit;
+    background: -moz-linear-gradient(left, rgba(117,96,109,0.9) 0%, rgba(87,71,81,0.9) 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(117,96,109,0.9)), color-stop(100%,rgba(87,71,81,0.9)));
+    background: -webkit-linear-gradient(left, rgba(117,96,109,0.9) 0%,rgba(87,71,81,0.9) 100%);
+    background: -o-linear-gradient(left, rgba(117,96,109,0.9) 0%,rgba(87,71,81,0.9) 100%);
+    background: -ms-linear-gradient(left, rgba(117,96,109,0.9) 0%,rgba(87,71,81,0.9) 100%);
+    background: linear-gradient(to right, rgba(117,96,109,0.9) 0%,rgba(87,71,81,0.9) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e675606d', endColorstr='#e6574751',GradientType=1 );
+}
+
+.no-cover_tellus {
+    background: rgb(117,96,109);
+    background: -moz-linear-gradient(left, rgba(117,96,109,1) 0%, rgba(87,71,81,1) 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(117,96,109,1)), color-stop(100%,rgba(87,71,81,1)));
+    background: -webkit-linear-gradient(left, rgba(117,96,109,1) 0%,rgba(87,71,81,1) 100%);
+    background: -o-linear-gradient(left, rgba(117,96,109,1) 0%,rgba(87,71,81,1) 100%);
+    background: -ms-linear-gradient(left, rgba(117,96,109,1) 0%,rgba(87,71,81,1) 100%);
+    background: linear-gradient(to right, rgba(117,96,109,1) 0%,rgba(87,71,81,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#75606d', endColorstr='#574751',GradientType=1 );
+}
+
+/* Logo & Button MENU */
+.top-header_tellus {
+    width: 100%;
+    height: 450px;
+    position: relative;
+}
+
+.top-header_tellus .logo_tellus {
+    position: absolute;
+    display: block;
+    height: 38px;
+    width: auto;
+    margin: 0;
+    top: 2rem;
+    left: 2rem;
+}
+
+.top-header_tellus .logo_tellus img {
+    height: 38px;
+    width: auto;
+}
+
+.top-header_tellus .menu_tellus {
+    display: block;
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    margin: 0;
+    border: 1px solid rgba(255,255,255,1);
+    border-radius: 2px;
+    background: none;
+    color: #fff;
+    font-size: 1.4rem;
+    height: 36px;
+    width: 80px;
+    padding: 0 1rem;
+    outline: none;
+    transition: all ease 0.1s;
+}
+
+.top-header_tellus .menu_tellus:hover {
+    background: #fff;
+    color: #574751;
+}
+
+.top-header_tellus .menu_tellus:active { 
+    background: rgba(255,255,255,0.5); 
+    border: 1px solid rgba(255,255,255,0);
+}
+
+.top-header_tellus .menu_tellus i { margin-right: 0.5rem; }
+.top-header_tellus .menu_tellus #close-menu { margin-right: 0.6rem; vertical-align: 0.038em;} 
+
+/* Navigation */
+.main-menu_tellus {
+    position: relative;
+    right: 0;
+    left: 0;
+    top: -37rem;
+    z-index: 300;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.main-menu_tellus ul { 
+    list-style: none; 
+    padding: 0;
+    margin: 0;
+    background: #574751;
+}
+
+.main-menu_tellus li a {
+    display: block;
+    width: 100%;
+    height: 65px;
+    font-size: 2.2rem;
+    color: #fff;
+    font-weight: 400;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #5c4b55;
+    line-height: 2.9;
+}
+
+.main-menu_tellus li:first-child a {
+    -webkit-box-shadow:inset 0 3px 3px 0 rgba(0,0,0,0.3);
+    box-shadow:inset 0 3px 3px 0 rgba(0,0,0,0.3);
+}
+
+.main-menu_tellus li:last-child a {
+    -webkit-box-shadow:inset 0 -3px 3px 0 rgba(0,0,0,0.1);
+    box-shadow:inset 0 -3px 3px 0 rgba(0,0,0,0.1);
+    border-bottom: none;
+}
+
+.main-menu_tellus li a:hover {  background: #4a3d45; }
+
+/* Title & Description*/
+.header-cover_tellus {
+    position: relative;
+    background-color: transparent;
+    z-index: 100;
+    margin: -370px 0 0;
+    height: 370px;
+    overflow: hidden;
+}
+
+.header-cover_tellus .img-cover_tellus, 
+.header-cover_tellus .no-cover_tellus { 
+    margin-top: 0;
+    width: 100%;
+    height: 450px;
+    background-position: center center;
+    top: -80px;
+    z-index: -1;
+    position: relative;
+}
+
+ .inner_tellus h1 {
+    font-weight: 100;
+    color: #fff;
+    font-size: 4.6rem;
+}
+
+ .inner_tellus p {
+    font-size: 1.7rem;
+    font-weight: 300;
+    color: #e5e5e5;
+    line-height: 1.16;
+    margin: 0;
+    max-width: 540px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* Animation menu */
+.collapse { display: none;}
+.collapse.in { display: block; }
+
+.collapsing {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  -webkit-transition-timing-function: ease;
+       -o-transition-timing-function: ease;
+          transition-timing-function: ease;
+  -webkit-transition-duration: .35s;
+       -o-transition-duration: .35s;
+          transition-duration: .35s;
+  -webkit-transition-property: height, visibility;
+       -o-transition-property: height, visibility;
+          transition-property: height, visibility;
+}
+
+.clearfix:before,
+.clearfix:after,
+.navbar-collapse:before,
+.navbar-collapse:after,
+.modal-footer:before,
+.modal-footer:after {
+  display: table;
+  content: " ";
+}
+.clearfix:after,
+.navbar-collapse:after,
+.modal-footer:after {
+  clear: both;
+}
+
+ /* ==========================================================================
+   					            4. Search 
+   ========================================================================== */
+
+.search_tellus {
+    width: 100%;
+    height: auto;
+    background-color: #fff;
+    margin-bottom: 6rem;
+}
+
+.search_tellus .wrapper-form_tellus {
+    width: 100%;
+    background: #f9f9f9;
+    text-align: center;
+}
+
+.search_tellus form { 
+    display: block;
+    padding: 0 2rem;
+    box-sizing: padding-box;
+}
+
+.search_tellus #search-field {
+    width: 100%;
+    border: none;
+    margin: 0 auto;
+    background: none;
+    padding: 1.5rem 0;
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #bbb;
+    background-image: url(../img/search.svg);
+    background-repeat: no-repeat;
+    background-position: right center;
+    outline: none;
+}
+
+.wrapper-results_tellus { 
+    width: 740px;
+    margin: 3rem auto 0; 
+    background: #f9f9f9; 
+    border-radius: 2px;
+}
+
+#results p {
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #444;
+    background: #f9f9f9;
+    margin: 0 0 3rem;
+    border-bottom: 1px dashed #e5e5e5;
+    padding: 1.5rem 0;
+    text-transform: uppercase;
+}
+
+#results a { 
+    margin: 0; 
+    color: #bbb;}
+
+#results h2 {
+    font-weight: 300;
+    font-size: 2.4rem;
+    margin: 0 0 1rem 2rem;
+    padding: 0 0 2rem 0;
+}
+
+#results a:hover { color: #5e5e5e;}
+
+#results h2 a:before {
+    content: "•";
+    margin: 0 0 0 -2rem;
+    padding-right: 1.2rem;
+}
+
+ /* ==========================================================================
+   					            5 Foreach-Articles 
+   ========================================================================== */
+
+.article_tellus { 
+    display:-webkit-flex;
+    display: flex; 
+    margin: 4rem auto 0; 
+    padding-bottom: 2rem;
+    border-bottom: 1px dashed #e5e5e5;
+}
+
+.article_tellus .left-box { 
+    -webkit-flex: 2; 
+    flex: 2; 
+    position: relative; 
+}
+
+.article_tellus header h2 { 
+    font-size: 2.6rem; 
+    margin-top: 0; 
+    line-height: 1.1;
+    font-weight: 300;
+}
+
+.article_tellus header h2 a { color: #444; }
+.article_tellus header h2 a:hover { color: #ee6723; }
+
+.post-excerpt_tellus p { 
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: #5e5e5e;
+    line-height: 1.4;
+    margin: 0;
+}
+
+/*Footer*/
+.meta_tellus { line-height: 1.4; }
+
+.meta_tellus span, 
+.meta_tellus a {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #bbb;
+    margin-right: 0.5rem;
+}
+
+.meta_tellus i, 
+.meta_tellus .comment {
+    font-size: 1.2rem;
+    color: #ee6723;
+}
+
+.meta_tellus a:hover, 
+.meta_tellus .comment:hover { text-decoration: underline; }
+
+.meta_tellus i, 
+.meta_tellus span { margin-right: 0.3rem; }
+.meta_tellus i { vertical-align: 0.1em; }
+
+/*Tags*/
+.meta_tellus span a { 
+    display: inline-block;
+    font-size: 9px;
+    text-transform: uppercase; 
+    border: 1px solid #ddd;
+    color: #bbb;
+    padding: 0.1rem 0.3rem 0rem;
+    margin: 0 0.5rem 0 0;
+    line-height: 1.6;
+    border-radius: 2px;
+}
+
+.meta_tellus span a:hover { color: #5e5e5e; text-decoration: none; }
+
+/*Date*/
+.datetime_tellus {
+    position: absolute; 
+    left: -7rem;
+    top: 0;
+    width: 48px;
+    height: 56px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    line-height: 0.8;
+    text-align: center;
+    padding-top: 0.4rem;
+    background: #fff;
+}
+
+.datetime_tellus time {
+    font-weight: 300;
+    color: #bbb;
+    line-height: 1.1;
+    text-align: center;
+}
+
+.datetime_tellus time span { display: block; }
+
+.datetime_tellus time .day { font-size: 2rem; margin: 0 auto; padding-left: 0.1rem; }
+.datetime_tellus time .month { font-size: 1.2rem; margin: 0 auto; text-transform: uppercase; }
+.datetime_tellus time .year { font-size: 1.2rem; margin: 0.2rem auto 0; }
+
+.datetime_tellus i {
+    position: absolute;
+    bottom: -1.6rem;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    
+    
+    text-align: center;
+    z-index: -5;
+    font-size: 1.8rem;
+}
+
+.article_tellus .article-img_tellus {
+    display: block;
+    width: 110px;
+    height: 84px;
+    margin-left: 2rem;
+    opacity: 0.8;
+}
+
+.article_tellus .article-img_tellus:hover { opacity: 1; }
+
+.article_tellus .article-img_tellus > div {
+    width: 110px;
+    height: 84px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 2px;
+}
+
+ /* ==========================================================================
+   					            6. Pagination 
+   ========================================================================== */
+
+.pagination_tellus {
+    text-align: center;
+    position: relative;
+    margin: 6rem auto;
+    line-height: 1.4;
+}
+
+.pagination_tellus a {
+    position: absolute;
+    display: inline-block;
+    padding: 0;
+    color: #bbb;
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.pagination_tellus a i { vertical-align: 1px; font-size: 1.2rem; }
+
+.pagination_tellus a span { padding: 0 0.5rem; }
+
+.newer-posts_tellus { left: 0; }
+.older-posts_tellus { right: 0; }
+
+.pagination_tellus .page-number_tellus {
+    font-size: 1.4rem;
+    color: #bbb;
+    vertical-align: 7px;
+}
+
+.pagination_tellus a:hover { color: #574751; text-decoration: underline; }
+
+ /* ==========================================================================
+   					            7. Footer 
+   ========================================================================== */
+
+.footer-tellus {
+    min-height: 60px;
+    width: 100%;
+    background-color: #574751;
+    text-align: center;
+    padding: 0;
+}
+
+.footer-tellus p { 
+    display: inline-block;
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin: 0;
+    color: #fff;
+    padding: 1.5rem 0 1rem;
+    line-height: 1.4;
+    vertical-align: -12px;
+}
+
+.footer-tellus p a { color: #ffb347; font-weight: 700; }
+
+.footer-tellus p a:hover { text-decoration: underline; }
+
+ /* ==========================================================================
+   					            8. Post 
+   ========================================================================== */
+
+/* Post header */
+#container_tellus .inner_tellus { text-align: left; }
+
+#container_tellus  .vertical_tellus .inner_tellus h1 { 
+    font-size: 4.4rem;
+    margin: 0;
+    padding-bottom: 2rem;
+    border-bottom: 1px dashed rgba(255,255,255,0.3);
+}
+
+#container_tellus  .meta_tellus span, 
+#container_tellus  .meta_tellus a, 
+#container_tellus  .meta_tellus time {
+    font-size: 1.4rem;
+    color: #f0f0f0;
+    font-weight: 400;
+}
+
+#container_tellus  .meta_tellus i, 
+#container_tellus  .meta_tellus .comment {
+    font-size: 1.4rem;
+    color: #ffb347;
+}
+
+/* Post footer */
+.post-footer_tellus { margin: 5rem auto 0; }
+
+.post-footer_tellus .tags_tellus { margin-bottom: 1.5rem;}
+
+.post-footer_tellus .tags_tellus i {
+    font-size: 1.4rem;
+    color: #5e5e5e;
+    margin-right: 1rem;
+}
+
+.post-footer_tellus .tags_tellus a,
+.post-footer_tellus .tags_tellus {
+    font-size: 1.2rem;
+    color: #bbb;
+    text-transform: uppercase;
+    line-height: 1.6;
+}
+
+.post-footer_tellus .tags_tellus a:hover {
+    text-decoration: underline;
+    color: #5e5e5e;
+}
+
+.post-footer_tellus .wrapper-author_tellus { 
+    border-top: 1px dashed #e5e5e5;
+    padding: 2rem 0 4rem;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.post-footer_tellus .wrapper-author_tellus .author-image_tellus a {
+    display: block;
+    height: 80px;
+    width: 80px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    margin-right: 2rem;
+}
+
+.post-footer_tellus .wrapper-author_tellus .author_tellus { -webkit-flex: 1; flex: 1; }
+
+.post-footer_tellus .wrapper-author_tellus .author_tellus h4 {
+    font-size: 2.4rem;
+    margin: 0 0 7px;
+    font-weight: 400;
+}
+
+.post-footer_tellus .wrapper-author_tellus .author_tellus h4 a { color: #444; }
+.post-footer_tellus .wrapper-author_tellus .author_tellus h4 a:hover { text-decoration: underline; }
+
+.post-footer_tellus .wrapper-author_tellus .author_tellus p {
+    font-size: 1.4rem;
+    color: #5e5e5e;
+    margin: 0;
+    line-height: 1.3;
+    font-weight: 300;
+}
+
+/* Share & Comments */
+.share-comments_tellus {
+    background: #f1f1f1;
+    padding: 4rem 0 6rem;
+    border-top: 1px dashed #e5e5e5;
+}
+
+.share-button_tellus {
+    display: -webkit-flex;
+    display: flex;
+    width: 100%;
+    max-width: 700px;
+}
+
+/* Icons share */
+.share-button_tellus > a {
+    -webkit-flex: 1;
+    flex: 1;
+    width: 100%;
+    max-width: 60px;
+    min-width: 60px;
+    height: 60px;
+    background: #fff;
+    margin-right: 5px;
+    text-align: center;
+    border: 1px dashed #e5e5e5;
+}
+
+.share-button_tellus a:last-of-type{ margin-right: 0; }
+
+.share-button_tellus > a i {
+    font-size: 2rem;
+    vertical-align: -14px;
+    color: #444;
+}
+
+.share-button_tellus > a:hover i { color: #63ac3e; }
+
+/* Comments */
+.share-button_tellus form {
+     -webkit-flex: 3;
+    flex: 3;
+    width: 100%;
+}
+
+.cmd_tellus {
+    width: 100%;
+    height: 62px;
+    border: 1px dashed #e5e5e5;
+    padding: 0 2rem;
+    margin: 0 auto;
+    font-size: 1.4rem;
+    font-weight: 700;
+    transition: all ease 0.3s;
+    text-transform: uppercase;
+    background: #fff;
+    margin-left: 5px;
+}
+
+.cmd_tellus:hover { color: #63ac3e; }
+
+.button-mobile_tellus { display: none; }
+
+/* Next/Prev */
+.read-next_tellus { background: #f1f1f1; padding-bottom: 6rem; }
+
+.read-next_tellus .wrapper_tellus {
+    display: -webkit-flex;
+    display: flex;
+}
+
+.prev_tellus, .next_tellus { 
+    -webkit-flex: 1;
+    flex: 1; 
+}
+.prev_tellus { padding-left: 1rem; }
+.next_tellus { padding-right: 1rem; }
+
+.read-next_tellus span  {
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    display: block;
+    font-weight: 700;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.4rem;
+}
+
+.read-next_tellus span a { 
+    display: inline-block; 
+    margin-right: 0.5rem;
+    color: #444;
+}
+
+.read-next_tellus span time { 
+    color: #bbb; 
+    font-weight: 400;
+}
+
+.read-next_tellus section h2 { 
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 1.1;
+    display: inline-block;
+    margin: 0.5rem 0 0 0;
+}
+
+.read-next_tellus section h2 a {  color: #63ac3e; }
+
+.read-next_tellus section h2 a:hover,
+.read-next_tellus span a:hover { text-decoration: underline; }
+
+
+ /*
+==========================================================================
+   					         9. Author/Tag Page
+========================================================================== */
+
+.header-cover_tellus .inner_tellus .info-author_tellus h1 {margin-top: 0; }
+
+.header-cover_tellus .inner_tellus .number-img_tellus {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.header-cover_tellus .inner_tellus .number-img_tellus .authorimage_tellus {
+    display: inline-block;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: 2px solid #fff;
+    z-index: 10;
+    position: relative;
+}
+
+.header-cover_tellus .inner_tellus .number-img_tellus .number-posts_tellus {
+    display: inline-block;
+    height: 64px;
+    width: 64px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    vertical-align: 3.6rem;
+    margin-left: -1.2rem;
+    z-index: 2;
+}
+
+.header-cover_tellus .inner_tellus .number-img_tellus .number-posts_tellus p {
+    font-size: 9px;
+    font-weight: 400;
+    color: #e5e5e5;
+    text-transform: uppercase;
+    margin-top: 1.5rem;
+}
+
+.header-cover_tellus .inner_tellus .number-img_tellus .number-posts_tellus p span { 
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+.header-cover_tellus .inner_tellus h5,
+.header-cover_tellus .inner_tellus h5 a { 
+    display: inline-block;
+    font-size: 10px;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 400;
+}
+
+.header-cover_tellus .inner_tellus h5 { margin-top: 1.2rem; }
+
+.header-cover_tellus .inner_tellus h5 a:hover { text-decoration: underline; }
+
+.header-cover_tellus .inner_tellus h5 i {
+    font-size: 10px;
+    color: #ffb347;
+    margin-right: 0.3rem;
+    line-height: 1.4;
+}
+
+ /*
+==========================================================================
+   					    10.  Media Queries (Tablet)
+========================================================================== */
+
+@media all and (max-width: 900px) { 
+    
+    h1 { 
+        font-size: 4rem;
+        text-indent: -2px;
+    }
+
+    h2 { font-size: 3rem; }
+
+    h3 { font-size: 2.8rem; }
+
+    h4 { font-size: 2.4rem; }
+    
+    .wrapper_tellus {
+        width: auto;
+        max-width: none;
+        margin: 0 2rem;
+    }
+    
+    .inner_tellus { max-width: none; }
+    
+    .inner_tellus h1,
+    #container_tellus .vertical_tellus .inner_tellus h1 { font-size: 4rem; }
+    
+    .main-menu_tellus li a {
+        font-size: 2rem;
+        height: 55px;
+        line-height: 2.7; 
+    }
+    
+    .wrapper-results_tellus { width: auto; }
+    
+    .search_tellus form { margin: 0 !important; }
+    
+    #results h2 { font-size: 2rem; }
+    
+    .article_tellus { margin: 4rem 2rem 0; }
+
+    .datetime_tellus {
+        position: static;
+        display: inline;
+        border: none;
+    }
+
+    .datetime_tellus time { line-height: 1; }
+
+    .datetime_tellus time .day { font-size: 1.2rem; margin-right: -0.3rem; display: inline-block;}
+    
+    .datetime_tellus time .month { text-transform: lowercase; display: inline-block; margin-right: -0.3rem; }
+    .datetime_tellus time .month:first-letter { text-transform: uppercase;}
+    
+    .datetime_tellus time .year { color: #bbb; margin-right: 1rem; display: inline-block;}
+
+    .datetime_tellus i { display: none; }
+    
+    .pagination_tellus { margin: 4rem 2rem; }
+    
+    .post-footer_tellus .tags_tellus a { margin-right: 0.3rem; }
+    
+    .share-button_tellus { max-width: none; }
+
+    .read-next_tellus .surround_tellus h2 { font-size: 2.2rem; }
+
+}
+
+ /* ==========================================================================
+   					            16.  Media Queries (Phone)
+   ========================================================================== */
+@media all and (max-width: 600px) { 
+
+    h1 {
+        font-size: 3rem;
+        line-height: 1.1em;
+		}
+     
+    h2 { font-size: 2.8rem; }
+
+    h3 { font-size: 2.6rem; }
+	
+    h4 { font-size: 2.3rem; }
+    
+    .wrapper_tellus { margin: 0 1rem; }
+    
+    .inner_tellus { padding: 0 1rem; }
+    
+    .post-content_tellus { font-size: 1.6rem; line-height: 1.4; }
+    
+    .top-header_tellus .logo_tellus { top: 1rem; left: 1rem; }
+    
+    .top-header_tellus .menu_tellus { top: 1rem; right: 1rem; }
+    
+    .top-header_tellus .menu_tellus #close-menu { vertical-align: 0px; }
+    
+    .main-menu_tellus { top: -39rem; }
+    
+    .header-cover_tellus {
+        margin: -390px 0 0;
+        height: 390px;
+    }
+
+    .header-cover_tellus .img-cover_tellus, 
+    .header-cover_tellus .no-cover_tellus { top: -60px; }
+    
+    .inner_tellus h1, 
+    #container_tellus .vertical_tellus .inner_tellus h1 { font-size: 3rem; }
+    
+    .inner_tellus p { font-size: 1.4rem; max-width: none; }
+    
+    .search_tellus form { padding: 0 1rem; }
+    
+    #results h2 { font-size: 1.8rem; }
+    
+    .article_tellus {
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        margin-bottom: 4rem;
+    }
+    
+    .article_tellus .left-box {
+        -webkit-order: 2;
+        -ms-flex-order: 2;
+        order: 2;
+        -webkit-flex: 0 1 auto;
+        -ms-flex: 0 1 auto;
+        flex: 0 1 auto;
+    }
+    
+    .article_tellus header h2 { font-size: 2.4rem; }
+    
+    .article_tellus .article-img_tellus,
+    .article_tellus .article-img_tellus > div {
+        margin: 0 0 1rem 0; 
+        width: 100%;
+        opacity: 1;
+    }
+    
+    .meta_tellus .tags-article { display: none; }
+    
+    .datetime_tellus time .day { padding-left: 0; }
+    
+    .datetime_tellus time,
+    #container_tellus .meta_tellus time { display: block; text-align: left; padding: 0; }
+    
+    .datetime_tellus time .month { margin-right: -0.1rem; }
+    
+    .pagination_tellus { margin: 4rem 1rem; }
+    
+    .pagination_tellus a span { display: none; }
+    
+    .pagination_tellus a i { 
+        height: 30px;
+        width: 40px;
+        font-size: 1.4rem;
+        color: #bbb;
+        border: 1px dashed #574751;
+        border-radius: 2px;
+        line-height: 2.2;
+        margin: -1.2rem 0 0;
+        color: #574751;
+    }
+    
+    .share-button_tellus a { max-width: none; height: 58px; }
+    
+    .share-button_tellus > a { margin: 0 0 0 6px; }
+    
+    .share-button_tellus > a:first-child { margin-left: 0; }
+     
+    .share-button_tellus form { display: none; }    
+    
+    .cmd_tellus { margin-left: 0; }
+
+    .button-mobile_tellus { display: block; margin-top: 8px; }
+    
+    .read-next_tellus .wrapper_tellus { display: block; }
+    
+    .next_tellus { padding: 0 0 4rem 0 }
+    .prev_tellus { padding: 0; }
+
+    .read-next_tellus .wrapper_tellus .surround_tellus { 
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+    
+    .read-next_tellus .wrapper_tellus .surround_tellus h2 {
+        -webkit-order: 2;
+        -ms-flex-order: 2;
+        order: 2;
+        -webkit-flex: 0 1 auto;
+        -ms-flex: 0 1 auto;
+        flex: 0 1 auto;
+    }
+    
+    .read-next_tellus .surround_tellus div {
+        margin: 1.5rem 0 0.5rem;
+        width: auto;
+    }
+}

@@ -1,0 +1,7 @@
+<div class="main-menu_tellus collapse navbar-collapse">
+   <ul class="nav nav-tabs nav-stacked">
+        {{#foreach navigation}}
+            <li class="nav-{{slug}}{{#if current}} nav-current{{/if}}" role="presentation"><a href="{{url absolute="true"}}">{{label}}</a></li>
+        {{/foreach}}
+    </ul>
+</div>

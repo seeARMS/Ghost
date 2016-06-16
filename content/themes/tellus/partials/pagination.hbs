@@ -1,0 +1,9 @@
+<nav class="pagination_tellus wrapper_tellus" role="navigation">
+    {{#if prev}}
+        <a class="newer-posts_tellus" href="{{page_url prev}}"><i class="fa fa-long-arrow-left"></i><span>NEWER POSTS</span></a>
+    {{/if}}
+    <span class="page-number_tellus">PAGE {{page}}/{{pages}}</span>
+    {{#if next}}
+        <a class="older-posts_tellus" href="{{page_url next}}"><span>OLDER POSTS</span><i class="fa fa-long-arrow-right"></i></a>
+    {{/if}}
+</nav>

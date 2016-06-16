@@ -1,0 +1,9 @@
+{{#if @blog.logo}}
+    <a class="logo_tellus" href="{{@blog.url}}">
+        <img src="{{@blog.logo}}" alt="{{@blog.title}}" />
+    </a>
+{{/if}}
+{{#if @blog.navigation}}
+    <button type="button" class="navbar-toggle menu_tellus" data-toggle="collapse" data-target=".navbar-collapse">
+    <i id="open-menu" class="fa fa-navicon"></i><i id="close-menu" class="fa fa-close"></i>MENU</button>
+{{/if}}

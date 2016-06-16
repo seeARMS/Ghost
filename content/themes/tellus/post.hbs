@@ -1,0 +1,129 @@
+{{!< default}}
+              
+<div id="container_tellus" class="main-wrapper_tellus">
+    {{#post}}
+    <header class="post-header_tellus">
+        <div class="top-header_tellus {{#if image}} img-cover_tellus" style="background-image: url({{image}}){{else}}no-cover_tellus{{/if}}">
+            {{> header_menu}}
+        </div>
+        {{#if @blog.navigation}}
+            {{navigation}}
+        {{/if}}
+    </header>
+    
+    <main role="main">
+        <article class="{{post_class}}">
+            <header class="header-cover_tellus">
+                <div class="header-img_tellus {{#if image}} img-cover_tellus" style="background-image: url({{image}}){{else}}no-cover_tellus{{/if}}">
+                    <div class="vertical_tellus wrapper_tellus">
+                        <section class="inner_tellus">
+                            <h1 class="post-title_tellus">{{title}}</h1>
+                            <div class="meta_tellus">
+                                <span>By</span>{{author}}
+                                <i class="fa fa-comment-o"></i><a class="comment" href="{{url}}#disqus_thread" data-disqus-identifier="{{id}}"></a>
+                                <time datetime="{{date format='YYYY-MM-DD'}}">{{date format="MMMM DD YYYY"}}</time>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </header>
+            
+            {{> search}}
+            
+            <section class="post-content_tellus wrapper_tellus">
+                {{content}}
+            </section> 
+            
+            <footer class="post-footer_tellus wrapper_tellus">
+                {{#if tags}}
+                    <div class="tags_tellus"><i class="fa fa-tags"></i>{{tags separator=", "}}</div> 
+                {{/if}}
+                
+                <div class="wrapper-author_tellus">
+                {{#author}}
+                
+                    {{#if image}}
+                    <figure class="author-image_tellus">
+                        <a href="{{url}}" style="background-image: url({{image}})"><span class="hidden_tellus">{{name}}'s Picture</span></a>
+                    </figure>
+                    {{/if}}
+
+                    <section class="author_tellus">
+                        <h4><a href="{{url}}">{{name}}</a></h4>
+                        {{#if bio}}
+                            <p>{{bio}}</p>
+                        {{else}}
+                            <p>Read <a href="{{url}}">more posts</a> by this author.</p>
+                        {{/if}}
+                    </section>
+                
+                {{/author}}
+                </div>
+            </footer>
+        </article>
+        
+        <div class="share-comments_tellus">
+            <div class="wrapper_tellus">
+                <div class="share-button_tellus">
+                    <a target="_blank" href="https://twitter.com/share?text={{title}}&url={{url absolute="true"}}"><i class="fa fa-twitter"></i><span class="hidden_tellus">Twitter</span></a> 
+                    <a target="_blank" href="https://www.facebook.com/sharer.php?u={{url absolute="true"}}"><i class="fa fa-facebook"></i><span class="hidden_tellus">Facebook</span></a>
+                    <a target="_blank" href="https://plus.google.com/share?url={{url absolute="true"}}"><i class="fa fa-google-plus"></i> <span class="hidden_tellus">Google+</span></a>
+                    <form onsubmit="my.loadDisqus();return false;" class=formBlock><input class="cmd_tellus" type=submit value="Load Comments" /></form>
+                </div>
+                 
+                <div id="disqus_thread"><form class="button-mobile_tellus" onsubmit="my.loadDisqus();return false;" class=formBlock><input class="cmd_tellus" type=submit value="Load Comments" /></form></div>
+
+                <div class="disqusbox">
+                    {{! Disqus comments }}
+                    <script type="text/javascript">
+                        {{> custom/disqus this}}
+                        
+                        /* * * DON'T EDIT BELOW THIS LINE * * */
+                        var disqus_url = "{{url absolute="true"}}";
+                        var disqus_identifier = '{{post.id}}';
+                        var my = my || {};
+                            my.loadDisqus = function() {
+                                var dsq = document.createElement('script');
+                                dsq.type = 'text/javascript';
+                                dsq.async = true;
+                                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                            };
+                    </script>
+
+                    <noscript>Please enable javascript to <a rel="nofollow" href="http://disqus.com/?ref_noscript">discus this page, powered by Disqus.</a></noscript>
+                    <style scoped=scoped>
+                        @media print{
+                            .disqusbox{display:none}
+                            }
+                    </style>
+                </div>
+            </div> 
+        </div>
+    </main>
+   
+    <aside class="read-next_tellus">
+        <div class="wrapper_tellus">
+        {{#next_post}}
+            <div class="next_tellus">
+                <span><a href="{{url}}">Next article&#58;</a><time>{{date format='MMM DD YYYY'}}</time></span>
+                 <section>
+                    <h2><a href="{{url}}">{{title}}</a></h2>
+                </section>
+            </div>
+        {{/next_post}}
+        {{#prev_post}}
+            <div class="prev_tellus">
+                <span><a href="{{url}}">Previous article&#58;</a><time>{{date format='MMM DD YYYY'}}</time></span>
+                <section>
+                    <h2><a href="{{url}}">{{title}}</a></h2>
+                </section>
+            </div>
+        {{/prev_post}}
+        </div>
+    </aside>
+
+    {{/post}}
+</div>
+
+{{> footer}}

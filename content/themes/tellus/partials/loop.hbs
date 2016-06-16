@@ -1,0 +1,34 @@
+{{#foreach posts}}
+            
+    <article class="{{post_class}} article_tellus wrapper_tellus">
+        <div class="left-box">
+            <header>
+                <h2><a href="{{url}}">{{{title}}}</a></h2>
+            </header>
+            <section class="post-excerpt_tellus">
+                <p>{{excerpt words="19"}}&hellip;</p>
+            </section>
+            <footer class="meta_tellus">
+                <span>By</span>{{author}}
+                <i class="fa fa-comment-o"></i><a class="comment" href="{{url}}#disqus_thread" data-disqus-identifier="{{id}}"></a>
+                <div class="datetime_tellus">
+                    <time datetime="{{date format='YYYY-MM-DD'}}">
+                        <span class="day">{{date format="DD"}}</span>
+                        <span class="month">{{date format="MMM"}}</span>
+                        <span class="year">{{date format="YYYY"}}</span>
+                    </time>
+                    {{#if featured}}<i class="fa fa-bookmark"></i>{{/if}}
+                </div>
+                {{#if tags}}<span class="tags-article">{{tags separator=""}}</span>{{/if}}
+            </footer>
+        </div>
+        {{#if image}}
+            <a class="article-img_tellus" href="{{url}}"><div style="background-image: url({{image}})"></div></a>
+        {{/if}}
+    </article>
+
+{{/foreach}} 
+
+{{#if pagination}}
+    {{{pagination}}}
+{{/if}}
