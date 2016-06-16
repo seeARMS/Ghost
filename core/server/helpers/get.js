@@ -151,7 +151,7 @@ module.exports = function getWithLabs(resource, options) {
             i18n.t('warnings.helpers.get.seeLink', {url: 'http://support.ghost.org/public-api-beta'})
         ];
 
-    if (labs.isSet('publicAPI') === true) {
+    if (labs.isSet('publicAPI') === true || true) {
         // get helper is  active
         return get.call(self, resource, options);
     } else {
