@@ -23,12 +23,12 @@
 
     <main role="main">
         {{> search}}
-        {{#get "tags" limit="3" fields="name,description,slug" as |categories|}}
+        {{#get "tags" limit="3" fields="name,description,slug" include="count.posts" as |categories|}}
           {{#foreach categories}}
             
             <article class="article_tellus wrapper_tellus">
               <div class="left-box">
-                <a href="tag/{{slug}}"> {{name}} </a>
+                <a href="tag/{{slug}}"> {{name}} ({{count.posts}})</a>
                 <section class="post-excerpt_tellus">
                     <p>{{description}}</p>
                 </section>

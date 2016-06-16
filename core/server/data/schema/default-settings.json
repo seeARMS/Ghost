@@ -18,16 +18,16 @@
     },
     "blog": {
         "title": {
-            "defaultValue": "Ghost"
+            "defaultValue": "Boon"
         },
         "description": {
-            "defaultValue": "Just a blogging platform."
+            "defaultValue": "Simple, intelligent help centers."
         },
         "logo": {
             "defaultValue": ""
         },
         "cover": {
-            "defaultValue": ""
+            "defaultValue": "https://images.unsplash.com/photo-1424392904403-8e1c65a6133a?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=3961fe5735ec00eade23e85598ea098b"
         },
         "defaultLang": {
             "defaultValue": "en_US",
